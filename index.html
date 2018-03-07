@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>VueJS Tutorials</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+  <body>
+    <div id='vue-app-one'>
+
+      <h2>{{ title }}</h2>
+      <p>{{ greetComputed }}</p>
+      <!-- seperate from greeting/button on bottom -->
+      <greeting></greeting>
+
+      <h1>DISPLAY</h1>
+      <p>{{ greet('night') }}</p>
+      <p>{{ name }}</p>
+      <p>{{ job }}</p>
+
+      <h1>DATA BINDING</h1>
+      <!-- to bind you can also just use : and remove the v-bind -->
+      <a v-bind:href="website">Net Ninja</a>
+      <input type="text" :value="name"/>
+      <p v-html="websiteTag"></p>
+
+      <h1>EVENTS</h1>
+      <!-- @ works the same as v-on: -->
+      <button @click="add(1)">add a year</button>
+      <button v-on:click="subtract(1)">subtract a year</button>
+      <button @dblclick="add(10)">add 10 year</button>
+      <button v-on:dblclick="subtract(10)">add 10 year</button>
+      <p>My age is {{ age }}</p>
+      <div id="canvas" v-on:mousemove="updateXY">{{ x }}, {{ y }}</div>
+
+      <h1>EVENT MODIFIERS</h1>
+      <button @click.once="add(1)">add a year only once</button>
+      <p>My age is {{ age }}</p>
+      <a v-on:click.prevent="click" href="http://www.thenetninja.co.uk">The Net Ninja</a>
+
+      <h1>KEYBOARD EVENTS</h1>
+      <label>Name:</label>
+      <input type="text" v-on:keyup.enter="logName"/>
+      <label>Age:</label>
+      <input type="text" v-on:keyup.alt.enter="logAge"/>
+
+      <h1>TWO-WAY DATA BINDING</h1>
+      <label>Name:</label>
+      <input type="text" v-model="dynamicName"/>
+      <span>{{ dynamicName }}</span>
+      <label>Age:</label>
+      <input type="text" v-model="dynamicAge"/>
+      <span>{{ dynamicAge }}</span>
+
+      <h1>COMPUTED PROPERTIES</h1>
+      <button v-on:click='a++'>Add to a</button>
+      <button v-on:click=b++>Add to b</button>
+      <p>A - {{ a }}</p>
+      <p>B - {{ b }}</p>
+      <p>Age + A = {{ addToA }}</p>
+      <p>Age + B = {{ addToB }}</p>
+
+      <h1>DYNAMIC CSS</h1>
+      <h2>Example 1</h2>
+      <!-- hardcoded in -->
+      <div v-on:click="available = !available" v-bind:class='{available: available}'>
+        <span>Ryu</span>
+      </div>
+      <h2>Example 2</h2>
+      <!-- dynamic -->
+      <button v-on:click="nearby = !nearby">Toggle nearby</button>
+      <button v-on:click="available = !available">Toggle available</button>
+      <div v-bind:class="compClasses">
+        <span>Ryu</span>
+      </div>
+
+    <h1>CONDITIONALS</h1>
+    <button v-on:click="error = !error">Toggle Error</button>
+    <button v-on:click="success = !success">Toggle Success</button>
+    <!-- if/else statements to toggle on/off -->
+    <p v-if="error">There has been an error</p>
+    <p v-else-if="success">Success!</p>
+    <!-- show statement to toggle on/off -->
+    <P v-show="error">There has been an error</p>
+    <P v-show="success">Success!</p>
+
+    <h1>LOOPING THROUGH LISTS WITH V-FOR</h1>
+    <ul>
+      <li v-for="(character, index) in characters">{{ index }} - {{ character }}</li>
+    </ul>
+    <ul>
+      <li v-for="(ninja, index) in ninjas">{{ index }} - {{ ninja.name }} - {{ ninja.age }}</li>
+    </ul>
+    <template v-for="ninja in ninjas">
+      <div v-for="(val,key) in ninja">
+        <p>{{ key }} - {{ val }}</p>
+      </div>
+    </template>
+
+
+
+
+
+  </div>
+
+  <div id="vue-app-two">
+
+    <h1>MULTIPLE VUE INSTANCES</h1>
+
+    <h2>{{ title }}</h2>
+    <p>{{ greetComputed }}</p>
+    <button v-on:click='changeTitle'>Change App One Title</button>
+    <!-- re-usable component -->
+    <!-- seperate from greeting/button on top -->
+    <greeting></greeting>
+
+  </div>
+
+    <script src='app.js'></script>
+  </body>
+</html>
